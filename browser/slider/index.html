@@ -31,5 +31,22 @@
       </div>
     </div>
   </section>
+ <script>
+  var idSlider = document.getElementById('slider')
+  var arrImg = [
+  'https://netology-code.github.io/hj-homeworks/browser/slider/i/airmax-jump.png',
+  'https://netology-code.github.io/hj-homeworks/browser/slider/i/airmax-on-foot.png',
+  'https://netology-code.github.io/hj-homeworks/browser/slider/i/airmax-playground.png',
+  'https://netology-code.github.io/hj-homeworks/browser/slider/i/airmax-top-view.png',
+  'https://netology-code.github.io/hj-homeworks/browser/slider/i/airmax.png',
+   ];
+  var curImg = 0;
+   setInterval(function() {
+    idSlider.src = arrImg[curImg];
+    if(curImg++>=arrImg.length-1) {
+        curImg=0;
+    }
+   }, 5000);
+ </script>
 </body>
 </html>
