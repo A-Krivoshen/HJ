@@ -36,4 +36,43 @@
     </div>
   </article>
 </body>
+<script>
+const idGalery = document.getElementById('currentPhoto');
+const idPrev = document.getElementById('prevPhoto');
+const idNext = document.getElementById('nextPhoto');
+var arrImg = [
+  'https://netology-code.github.io/hj-homeworks/browser/gallery/i/guggenheim-museum.jpg',
+  'https://netology-code.github.io/hj-homeworks/browser/gallery/i/headquarters.jpg',
+  'https://netology-code.github.io/hj-homeworks/browser/gallery/i/IAC.jpg',
+  'https://netology-code.github.io/hj-homeworks/browser/gallery/i/new-museum.jpg',
+  'https://netology-code.github.io/hj-homeworks/browser/gallery/i/breuer-building.jpg',
+]
+var lnImg = arrImg.length;
+var curImg = 0 //default number image of array
+idGalery.src = arrImg[curImg]; 
+
+
+idPrev.onclick = function (){
+  type = 0;
+  slideShow(type);
+}
+ 
+idNext.onclick = function (){
+  type = 1;
+  slideShow(type);
+}
+
+function slideShow(type){
+  if (type == 1)  {
+    curImg = curImg+1; 
+  }else{
+    curImg = curImg-1; 
+  }
+  if (curImg<0)
+    curImg = lnImg-1; 
+  if (curImg>lnImg-1)
+    curImg = 0; //first image
+  idGalery.src = arrImg[curImg];
+}
+</script>
 </html>
