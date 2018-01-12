@@ -1,28 +1,20 @@
-/* Данный JS код */
+const xhr = new XMLHttpRequest();
+const content = document.querySelector('#content');
+let result;
 
-// Регулируем видимость карточки
-function toggleCardVisible () {
- document.getElementById('content').classList.toggle('hidden');
- document.getElementById('card').classList.toggle('hidden');
-}
-
-
-document.getElementById('close').addEventListener('click', toggleCardVisible);
-
-document.getElementById('content').addEventListener('click', (event) => {
-    let target = null;
-    if (event.target.tagName === 'LI') {
-        target = event.target;
-    }
-    if (event.target.parentNode.tagName === 'LI') {
-        target = event.target.parentNode;
-    }
-
-    if (target) {
-      toggleCardVisible();
-      document.getElementById('card-title').innerHTML = target.dataset.title;
-      document.getElementById('card-author').innerHTML = target.dataset.author;
-      document.getElementById('card-info').innerHTML = target.dataset.info;
-      document.getElementById('card-price').innerHTML = target.dataset.price;
-    }
+xhr.addEventListener("load", () => {
+  if (xhr.status === 200) {
+    const books = JSON.parse(xhr.responseText);     
+    result = books.reduce((res, cur) => {
+    return res + 
+      `<li data-title="${cur.title}" data-author="${cur.author.name}" data-info="${cur.info}" data-price="${cur.price}"><img src="${cur.cover.small}"></li>`;
+    }, '');
+  } else {
+    result = 'Ошибка.';
+  };
+  
+  content.innerHTML = result;
 });
+
+xhr.open("GET", "https://netology-fbb-store-api.herokuapp.com/book/");
+xhr.send();

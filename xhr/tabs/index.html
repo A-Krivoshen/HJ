@@ -21,5 +21,54 @@
     </div>
     <div id="preloader" class="hidden">Загрузка...</div>
   </div>
+ <script>
+ 'use strict';
+
+const content = document.querySelector('#content');
+const preloader = document.querySelector('#preloader');
+const links = document.querySelectorAll('nav a');
+const emailTab = links[0];
+
+var xhr = new XMLHttpRequest();
+  
+xhr.addEventListener("load", loadEmail);
+xhr.open("GET", emailTab.getAttribute('href'), false);
+xhr.send();
+  
+function loadEmail() {
+  content.innerHTML = xhr.responseText;
+}
+
+function showTab(event) {
+  event.preventDefault();
+  
+  if (this.classList.contains('active') === false) {
+    xhr.addEventListener("load", onLoad);
+    xhr.addEventListener("loadstart", onLoadStart);
+    xhr.addEventListener("loadend", onLoadEnd);
+    xhr.open("GET", this.getAttribute('href'), false);
+    xhr.send();
+    
+    for (const lnk of links) { lnk.classList.remove('active'); }
+    this.classList.add('active');
+  } 
+  
+  function onLoad() {
+    content.innerHTML = xhr.responseText;
+  }
+
+  function onLoadStart() {
+    preloader.classList.remove('hidden');
+  }
+  
+  function onLoadEnd() {
+    preloader.classList.add('hidden');
+  }
+}
+
+Array.from(links).forEach(link => {
+  link.addEventListener('click', showTab);
+}); 
+ </script>
 </body>
 </html>

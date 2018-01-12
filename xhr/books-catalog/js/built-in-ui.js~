@@ -1,0 +1,32 @@
+'use strict';
+
+const card = document.getElementById('card');
+const content = document.getElementById('content');
+const li = content.firstElementChild;
+let xhrMassive;
+content.removeChild(li);
+
+const xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://neto-api.herokuapp.com/book/');
+xhr.onload = function() {
+ xhrMassive = JSON.parse(xhr.responseText);
+ parceBooksCatalog();
+}
+xhr.send();
+
+
+function parceBooksCatalog() {
+  for(let i = 0; i < xhrMassive.length; i++) {
+    const templeLi = document.createElement('li');
+    const img = document.createElement('img');
+    img.src = xhrMassive[i].cover.small;
+    templeLi.appendChild(img);
+    templeLi.dataset.title = xhrMassive[i].title;
+    templeLi.dataset.author = xhrMassive[i].author.name;
+    templeLi.dataset.info = xhrMassive[i].info;
+    templeLi.dataset.price = xhrMassive[i].price;
+    
+    
+    content.appendChild(templeLi);
+  }
+}
