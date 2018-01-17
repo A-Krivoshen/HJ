@@ -34,6 +34,5 @@
   		<audio src="wav/ride.wav" />
   	</li>
   </ul>
- <script src="./js/drum.js"></script>
 </body>
 </html>
