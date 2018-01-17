@@ -1,3 +1,13 @@
+const contactList = document.querySelector('.contacts-list');
+const peoples = JSON.parse(loadContacts()); 
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  contactList.innerHTML = peoples.reduce((res, cur)=>{
+    return res + 
+      `<li data-email=${cur.email} data-phone="${cur.phone}"><strong>${cur.name}</strong></li>`;
+  }, '');
+});
+
 let container;
 
 function loadContacts() {
@@ -36,3 +46,4 @@ function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
