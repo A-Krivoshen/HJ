@@ -8,9 +8,7 @@
   <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-  <h1>Звёздное небо</h1>
-  <canvas id="starnightsky"></canvas>
-  <p>Кликните на изображение чтобы сгенерировать новое.</p>
-  <script src="./js/star.js"></script>
+  <canvas id="draw"></canvas>
 </body>
+ <script src="./js/draw.js"></script>
 </html>
